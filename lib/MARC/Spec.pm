@@ -5,7 +5,6 @@ our $VERSION = '0.01';
 use Carp qw(croak);
 use Const::Fast;
 use Switch;
-use DDP;
 use Moo;
 use MARC::Spec::Field;
 use MARC::Spec::Subfield;
