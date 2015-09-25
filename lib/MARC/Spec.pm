@@ -442,7 +442,7 @@ sub _calculateLength {
     # start = #, end != #
     return $_[1] + 1 if('#' eq $_[0] && '#' ne $_[1]);
     # start != #, end = #
-    return undef if('#' ne $_[0] && '#' eq $_[1]);
+    return -1 if('#' ne $_[0] && '#' eq $_[1]);
     
     my $length = $_[1] - $_[0] + 1;
     
