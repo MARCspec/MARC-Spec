@@ -20,4 +20,9 @@ has operator => (
     lazy => 1,
     default => sub { "?" }
     );
+    
+has subTermSet => (
+    is => 'rw',
+    lazy => 1
+    );
 1;

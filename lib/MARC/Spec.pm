@@ -284,6 +284,8 @@ sub _matchSubTerms {
     # create a new SubSpec
     my $subSpec = MARC::Spec::SubSpec->new;
     
+    $subSpec->{subTermSet} = $subTerms;
+    
     if(defined $+{leftsubterm}) {
         unless('\\' eq substr $+{leftsubterm},0,1) {
             my $left_spec = _buildSpec($+{leftsubterm},$context_ref);
