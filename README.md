@@ -42,7 +42,7 @@ say $ms->subfields->[0]->subSpecs->[0]->[0]->rightSubTerm->comparable;          
 
 # DESCRIPTION
 
-MARC::Spec is a MARCspec - A common MARC record path language](http://marcspec.github.io/MARCspec/marc-spec.html) parser and validator for Perl.
+MARC::Spec is a [MARCspec - A common MARC record path language](http://marcspec.github.io/MARCspec/marc-spec.html) parser and validator for Perl.
 
 # AUTHOR
 
