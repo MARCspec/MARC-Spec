@@ -3,11 +3,11 @@ use warnings;
 use v5.10.0;
 use Test::More;
 use Test::Exception;
-use MARC::Spec::Parser;
+use MARC::Spec;
 use DDP class => { expand => 'all'};
 
 #my $parser = MARC::Spec::Parser->new('245{$a}');
-my $parser = MARC::Spec::Parser->new('245[0-3]/1-3{LDR/0=\A|LDR/0=\X}{LDR/1!=\X}');
+my $parser = MARC::Spec->new('245[0-3]/1-3{LDR/0=\A|LDR/0=\X}{LDR/1!=\X}');
 
 # checking field
 ok $parser->field->indexStart eq 0, 'field indexStart';

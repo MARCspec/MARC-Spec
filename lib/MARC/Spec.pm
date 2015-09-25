@@ -379,7 +379,6 @@ sub _getBaseSpec {
     my $indexStart = $obj->indexStart;
     my $indexEnd = $obj->indexEnd;
     my ($charStart, $charEnd);
-    print $base;
     $base .= '['.$indexStart;
        
     if($indexStart ne $indexEnd)
@@ -438,7 +437,6 @@ sub _validatePos {
 }
 
 sub _calculateLength {
-p @_;
     # start eq end
     return 1 if $_[0] eq $_[1];
     # start = #, end != #
