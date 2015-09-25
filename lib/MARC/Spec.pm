@@ -5,6 +5,7 @@ our $VERSION = '0.01';
 use Carp qw(croak);
 use Const::Fast;
 use Switch;
+use DDP;
 use Moo;
 use MARC::Spec::Field;
 use MARC::Spec::Subfield;
@@ -41,8 +42,10 @@ const our $INDICATORS => q{_(?<indicators>(?:[_a-z0-9][_a-z0-9]{0,1}))};
 const our $SUBSPECS => q{(?<subspecs>(?:\\{.+?(?<!(?<!(\$|\\\))(\$|\\\))\\})+)?};
 const our $SUBFIELDS => q{(?<subfields>\$.+)?};
 const our $FIELD => qq{(?<field>(?:$FIELDTAG$INDEX(?:$CHARPOS|$INDICATORS)?$SUBSPECS$SUBFIELDS))};
-const our $SUBFIELDTAGRANGE => q{(?<subfieldtagrange>(?:[0-9a-z]\-[0-9a-z]))};
-const our $SUBFIELDTAG => q{(?<tag>[\!-\?\[-\\{\\}-~])};
+#const our $SUBFIELDTAGRANGE => q{(?<subfieldtagrange>(?:[0-9a-z]\-[0-9a-z]))};
+const our $SUBFIELDTAGRANGE => q{(?<code>(?:[0-9a-z]\-[0-9a-z]))};
+#const our $SUBFIELDTAG => q{(?<tag>[\!-\?\[-\\{\\}-~])};
+const our $SUBFIELDTAG => q{(?<code>[\!-\?\[-\\{\\}-~])};
 const our $SUBFIELD => q{(?<subfield>\$}.qq{(?:$SUBFIELDTAGRANGE|$SUBFIELDTAG)$INDEX(?:$CHARPOS)?$SUBSPECS)};
 const our $LEFTSUBTERM => q{^(?<leftsubterm>(?:\\\(?:(?<=\\\)[\!\=\~\?]|[^\!\=\~\?])+)|(?:(?<=\$)[\!\=\~\?]|[^\!\=\~\?])+)?};
 const our $OPERATOR => q{(?<operator>\!\=|\!\~|\=|\~|\!|\?)};
@@ -133,6 +136,7 @@ sub _matchField {
     unless(defined $self->field->indexStart) {
         $self->field->{indexStart} = 0;
         $self->field->{indexEnd} = '#';
+        $self->field->{indexLength} = -1;
     }
 
     # base is the context for abbreviated subspecs
@@ -169,15 +173,15 @@ sub _matchSubfields {
     while($self->parsed->{subfields} =~ /$SUBFIELD/sg) {
     
         # handle subfield tag ranges
-        if($+{subfieldtagrange}) {
-            my $from = substr $+{subfieldtagrange},0,1;
-            my $to = substr $+{subfieldtagrange},2,1;
-            for my $tag ( $from..$to) {
-                push @{$self->{subfields}}, $self->_createSubfield(matches => \%+, tag => $tag);
-            }
-        } else {
-            push @{$self->{subfields}}, $self->_createSubfield(\%+);
-        }
+        #if($+{subfieldtagrange}) {
+        #    my $from = substr $+{subfieldtagrange},0,1;
+        #    my $to = substr $+{subfieldtagrange},2,1;
+        #    for my $tag ( $from..$to) {
+        #        push @{$self->{subfields}}, $self->_createSubfield(matches => \%+, tag => $tag);
+        #    }
+        #} else {
+            push @{$self->{subfields}}, $self->_createSubfield(%+);
+        #}
         $i++;
     }
 
@@ -189,16 +193,16 @@ sub _matchSubfields {
 
 sub _createSubfield {
     my ($self,%args) = @_;
-
     # create a new Subfield
     my $subfield = MARC::Spec::Subfield->new;
     my @pos;
-    
-    foreach my $key (keys %{$args{matches}}) {
-        if('subfieldtagrange' eq $key) {
-            $subfield->{tag} = $args{tag};
+    foreach my $key (keys %args) {
+        #if('subfieldtagrange' eq $key) {
+        if('code' eq $key) {
+            #$subfield->{tag} = $args{tag};
+            $subfield->{code} = $args{code};
         } elsif('index' eq $key) {
-            @pos = _validatePos($args{matches}{index});
+            @pos = _validatePos($args{index});
             $subfield->{indexStart} = $pos[0];
             $subfield->{indexEnd} = $pos[1]
                 if defined $pos[1];
@@ -207,7 +211,7 @@ sub _createSubfield {
             $subfield->{indexLength} = $indexLength
                 if defined $indexLength;
         } elsif('charpos' eq $key) {
-            @pos = _validatePos($args{matches}{charpos});
+            @pos = _validatePos($args{charpos});
             $subfield->{charStart} = $pos[0];
             $subfield->{charEnd} = $pos[1]
                 if defined $pos[1];
@@ -216,23 +220,24 @@ sub _createSubfield {
             $subfield->{charLength} = $charLength
                 if defined $charLength;
         } elsif('subspecs' ne $key) {
-            $subfield->{$key} = $args{matches}{$key};
+            $subfield->{$key} = $args{$key};
             
             # default for index
             unless(defined $subfield->indexStart) {
                 $subfield->{indexStart} = 0;
                 $subfield->{indexEnd} = '#';
+                $subfield->{indexLength} = -1;
             }
         }
     }
     
     $subfield->{base} = _getBaseSpec($subfield);
     # handle subspecs
-    if(defined $args{matches}{subspecs}) {
+    if(defined $args{subspecs}) {
         my @subfieldSubSpecs;
         
-        croak "$emitter Invalid SubSpec detected. $hint". $args{matches}{subspecs}
-            unless(@subfieldSubSpecs = $self->_matchSubSpecs($args{matches}{subspecs}));
+        croak "$emitter Invalid SubSpec detected. $hint". $args{subspecs}
+            unless(@subfieldSubSpecs = $self->_matchSubSpecs($args{subspecs}));
 
         foreach my $subfieldSubSpec (@subfieldSubSpecs) {
             # check if array length is above 1
@@ -248,7 +253,7 @@ sub _createSubfield {
             }
         }
     }
-
+#p $subfield;
     return $subfield;
     
 }
@@ -285,11 +290,9 @@ sub _matchSubTerms {
     my $subSpec = MARC::Spec::SubSpec->new;
     
     $subSpec->{subTermSet} = $subTerms;
-    
     if(defined $+{leftsubterm}) {
         unless('\\' eq substr $+{leftsubterm},0,1) {
             my $left_spec = _buildSpec($+{leftsubterm},$context_ref);
-            
             # this prevents the spec parsed again
             if($cache{$left_spec}) {
                 $subSpec->{leftSubTerm} = $cache{$left_spec};
@@ -371,13 +374,12 @@ sub _buildSpec {
 }
 
 sub _getBaseSpec {
-
     my $obj = shift;
-    my $base = $obj->tag;
-    my $indexStart = $obj->indexStart if defined $obj->indexStart;
-    my $indexEnd = $obj->indexEnd if defined $obj->indexEnd;
+    my $base = ($obj->can('tag')) ? $obj->tag : $obj->code;
+    my $indexStart = $obj->indexStart;
+    my $indexEnd = $obj->indexEnd;
     my ($charStart, $charEnd);
-    
+    print $base;
     $base .= '['.$indexStart;
        
     if($indexStart ne $indexEnd)
@@ -436,7 +438,7 @@ sub _validatePos {
 }
 
 sub _calculateLength {
-
+p @_;
     # start eq end
     return 1 if $_[0] eq $_[1];
     # start = #, end != #
@@ -494,23 +496,28 @@ L<MARC::Spec> - A MARCspec parser
     say ref $ms->subfields->[0]->subSpecs->[0]->[1]->rightSubTerm;  # MARC::Spec::ComparisonString
 
     # Access to attributes
+    say $ms->field->base;                                                           # 246[0-1]_16
     say $ms->field->tag;                                                            # 246
     say $ms->field->indexStart;                                                     # 0
     say $ms->field->indexEnd;                                                       # 1
     say $ms->field->indexLength;                                                    # 2
     say $ms->field->indicator1;                                                     # 1
     say $ms->field->indicator2;                                                     # 6
+    say $ms->field->subSpecs->[0]->subTermSet;                                      # '007/0=\h'
     say $ms->field->subSpecs->[0]->leftSubTerm->field->tag;                         # 007
     say $ms->field->subSpecs->[0]->leftSubTerm->field->charStart;                   # 0
     say $ms->field->subSpecs->[0]->leftSubTerm->field->charEnd;                     # 0
     say $ms->field->subSpecs->[0]->leftSubTerm->field->charLength;                  # 1
     say $ms->field->subSpecs->[0]->rightSubTerm->comparable;                        # 'h'
     say $ms->field->subSpecs->[0]->operator;                                        # '='
-    say $ms->subfields->[0]->tag;                                                   # 'f'
+    say $ms->subfields->[0]->base;                                                  # 'f[0-#]'
+    say $ms->subfields->[0]->code;                                                  # 'f'
     say $ms->subfields->[0]->indexStart;                                            # 0
     say $ms->subfields->[0]->indexEnd;                                              # '#'
+    say $ms->subfields->[0]->subSpecs->[0]->[0]->subTermSet;                        # '245$h~\[microform\]'
     say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->field->tag;           # 245
-    say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->subfields->[0]->tag;  # 'h'
+    say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->field->indexLength;   # -1
+    say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->subfields->[0]->code; # 'h'
     say $ms->subfields->[0]->subSpecs->[0]->[0]->rightSubTerm->comparable;          # '[microform]'
     say $ms->subfields->[0]->subSpecs->[0]->[1]->rightSubTerm->comparable;          # 'microfilm'
 
@@ -520,8 +527,7 @@ L<MARC::Spec> is a MARCspec - A common MARC record path language L<http://marcsp
 
 =head1 AUTHOR
 
-Carsten Klee E<lt>kleetmp-github@yahoo.deE<gt>
-
+Carsten Klee E<ltcodeeetmp-github@yahoo.deE<gtcode
 =head1 COPYRIGHT
 
 Copyright 2015- Carsten Klee

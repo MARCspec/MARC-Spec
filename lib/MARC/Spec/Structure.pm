@@ -10,11 +10,6 @@ has base => (
     lazy => 1
     );
     
-has tag => (
-    is => 'ro',
-    lazy => 1
-    );
-    
 has indexStart => (
     is => 'ro',
     lazy => 1

@@ -7,6 +7,11 @@ use Moo;
 use namespace::clean;
 extends 'MARC::Spec::Structure';
 
+has tag => (
+    is => 'ro',
+    lazy => 1
+    );
+
 has indicator1 => (
     is => 'rw',
     required => 0

@@ -39,13 +39,13 @@ say $ms->field->subSpecs->[0]->leftSubTerm->field->charLength;                  
 say $ms->field->subSpecs->[0]->rightSubTerm->comparable;                        # 'h'
 say $ms->field->subSpecs->[0]->operator;                                        # '='
 say $ms->subfields->[0]->base;                                                  # 'f[0-#]'
-say $ms->subfields->[0]->tag;                                                   # 'f'
+say $ms->subfields->[0]->code;                                                  # 'f'
 say $ms->subfields->[0]->indexStart;                                            # 0
 say $ms->subfields->[0]->indexEnd;                                              # '#'
 say $ms->subfields->[0]->subSpecs->[0]->[0]->subTermSet;                        # '245$h~\[microform\]'
 say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->field->tag;           # 245
 say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->field->indexLength;   # -1
-say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->subfields->[0]->tag;  # 'h'
+say $ms->subfields->[0]->subSpecs->[0]->[0]->leftSubTerm->subfields->[0]->code; # 'h'
 say $ms->subfields->[0]->subSpecs->[0]->[0]->rightSubTerm->comparable;          # '[microform]'
 say $ms->subfields->[0]->subSpecs->[0]->[1]->rightSubTerm->comparable;          # 'microfilm'
 ```

@@ -5,4 +5,9 @@ our $VERSION = '0.01';
 use Moo;
 use namespace::clean;
 extends 'MARC::Spec::Structure';
+
+has code => (
+    is => 'ro',
+    lazy => 1
+    );
 1;
