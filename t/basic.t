@@ -1,6 +1,6 @@
 use strict;
 use Test::More;
-use MARC::Spec::Parser;
+use MARC::Spec;
 use MARC::Spec::Field;
 use MARC::Spec::Subfield;
 use MARC::Spec::ComparisonString;
