@@ -1,6 +1,5 @@
 package MARC::Spec::Comparisonstring;
 
-use strictures 2;
 use Carp qw(croak);
 use Moo;
 use namespace::clean;
