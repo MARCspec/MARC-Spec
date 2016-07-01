@@ -64,10 +64,9 @@
          "web" : "https://github.com/MARCspec/MARC-Spec"
       }
    },
-   "version" : "0.0.2",
+   "version" : "0.0.1",
    "x_contributors" : [
-      "Carsten Klee <cKlee@users.noreply.github.com>",
-      "Johann Rolschewski <jorol@cpan.org>"
+      "Carsten Klee <cKlee@users.noreply.github.com>"
    ]
 }
 
