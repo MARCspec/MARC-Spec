@@ -1,7 +1,8 @@
-/MARC-Spec-Parser-*
+/MARC-Spec*
 /.build
 /_build*
 /Build
 MYMETA.*
 !META.json
 /.prove
+*.tar.gz
