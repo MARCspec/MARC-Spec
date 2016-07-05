@@ -28,14 +28,15 @@ const my $CHARPOS => qq{\\/(?<charpos>$POSITIONORRANGE)};
 const my $INDICATORS => q{_(?<indicators>(?:[_a-z0-9][_a-z0-9]{0,1}))};
 const my $SUBSPECS => q{(?<subspecs>(?:\\{.+?(?<!(?<!(\$|\\\))(\$|\\\))\\})+)?};
 const my $SUBFIELDS => q{(?<subfields>\$.+)?};
-const my $FIELD => qq{(?<field>(?:$FIELDTAG$INDEX(?:$CHARPOS|$INDICATORS)?$SUBSPECS$SUBFIELDS))};
+const my $FIELD => qr/(?<field>(?:$FIELDTAG$INDEX(?:$CHARPOS|$INDICATORS)?$SUBSPECS$SUBFIELDS))/s;
 const my $SUBFIELDRANGE => q{(?<range>(?:[0-9a-z]\-[0-9a-z]))};
 const my $SUBFIELDTAG => q{(?<code>[\!-\?\[-\\{\\}-~])};
-const my $SUBFIELD => q{(?<subfield>\$}.qq{(?:$SUBFIELDRANGE|$SUBFIELDTAG)$INDEX(?:$CHARPOS)?$SUBSPECS)};
+const my $SUBFIELD => qr/(?<subfield>\$(?:$SUBFIELDRANGE|$SUBFIELDTAG)$INDEX(?:$CHARPOS)?$SUBSPECS)/s;
 const my $LEFTSUBTERM => q{^(?<left>(?:\\\(?:(?<=\\\)[\!\=\~\?]|[^\!\=\~\?])+)|(?:(?<=\$)[\!\=\~\?]|[^\!\=\~\?])+)?};
 const my $OPERATOR => q{(?<operator>\!\=|\!\~|\=|\~|\!|\?)};
 const my $SUBTERMS => qq{(?:$LEFTSUBTERM$OPERATOR)?(?<right>.+)}.q{$};
-const my $SUBSPEC => q{(?:\\{(.+?)\\})};
+const my $SUBSPEC => qr/(?:\{(.+?)\})/s;
+const my $UNESCAPED => qr/(?<![\\\\\$])[\{\}]/s;
 
 const my $MIN_LENGTH_FIELD => 3;
 const my $MIN_LENGTH_SUBFIELD => 2;
@@ -65,7 +66,7 @@ sub _match_field {
 
     _do_checks($self->spec, $MIN_LENGTH_FIELD);
 
-    $self->spec =~ /$FIELD/sg;
+    $self->spec =~ $FIELD;
     
     %{$self->{_parsed}} = %+;
 
@@ -134,7 +135,7 @@ sub _match_subfields {
 
     my $subfields = [];
     my $i = 0;
-    while($self->{_parsed}->{subfields} =~ /$SUBFIELD/sg) {
+    while($self->{_parsed}->{subfields} =~ /$SUBFIELD/g) {
         if(defined $+{range}) {
             my $from = substr $+{range},0,1;
             my $to = substr $+{range},2,1;
@@ -179,7 +180,7 @@ sub _match_subspecs {
     my ($self, $subspecs) = @_;
     my @subspecs;
 
-    foreach ($subspecs =~ /$SUBSPEC/sg) {
+    foreach ($subspecs =~ /$SUBSPEC/g) {
         push @subspecs, [split /(?<!\\)\|/];
     }
     return \@subspecs;
@@ -188,7 +189,7 @@ sub _match_subspecs {
 sub _match_subterms {
     my ($self,$subTerms,$context) = @_;
 
-    if($subTerms =~ /(?<![\\\\\$])[\{\}]/) {
+    if($subTerms =~ $UNESCAPED) {
         _throw("Unescaped character detected.", $subTerms);
     }
 
