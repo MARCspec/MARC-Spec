@@ -5,7 +5,7 @@ use Moo;
 use MARC::Spec::Parser;
 use namespace::clean;
 
-our $VERSION = '0.0.2';
+our $VERSION = '0.0.3';
 
 has field => (
     is => 'rw',
