@@ -5,9 +5,9 @@ use Const::Fast;
 use Moo;
 use MARC::Spec;
 use MARC::Spec::Field;
-use MARC::Spec::Subfield;
-use MARC::Spec::Comparisonstring;
-use MARC::Spec::Subspec;
+require MARC::Spec::Subfield;
+require MARC::Spec::Comparisonstring;
+require MARC::Spec::Subspec;
 use namespace::clean;
 
 our $VERSION = '0.0.2';
