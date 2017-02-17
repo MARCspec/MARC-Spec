@@ -59,7 +59,7 @@ L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>
 
 =head1 DESCRIPTION
 
-L<MARC::Spec::Field|MARC::Spec::Comparisonstring> is the comparison string specification of a L<MARC::Spec|MARC::Spec>.
+L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring> is the comparison string specification of a L<MARC::Spec|MARC::Spec>.
 See L<MARCspec - A common MARC record path language|http://marcspec.github.io/MARCspec/> for further 
 details on the syntax.
 
@@ -112,7 +112,7 @@ Please report any bugs to L<https://github.com/MARCspec/MARC-Spec/issues|https:/
 L<MARC::Spec|MARC::Spec>,
 L<MARC::Spec::Field|MARC::Spec::Field>,
 L<MARC::Spec::Subfield|MARC::Spec::Subfield>,
-L<MARC::Spec::Structure|MARC::Spec::Strucure>,
+L<MARC::Spec::Structure|MARC::Spec::Structure>,
 L<MARC::Spec::Subspec|MARC::Spec::Subspec>
 
 =cut

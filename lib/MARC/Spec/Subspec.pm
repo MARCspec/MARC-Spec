@@ -58,6 +58,7 @@ L<MARC::Spec::Subspec|MARC::Spec::Subspec>
     # add subterms to subspec
     $subspec->left($ms);
     $subspec->right($cmp);
+    $subspec->operator('=');
     
     say $subspec->subterms;     # '245$a=\Perl'
 
@@ -120,8 +121,8 @@ Please report any bugs to L<https://github.com/MARCspec/MARC-Spec/issues|https:/
 L<MARC::Spec|MARC::Spec>,
 L<MARC::Spec::Field|MARC::Spec::Field>,
 L<MARC::Spec::Subfield|MARC::Spec::Subfield>,
-L<MARC::Spec::Structure|MARC::Spec::Strucure>,
-L<MARC::Spec::ComparisonString|MARC::Spec::ComparisonString>,
+L<MARC::Spec::Structure|MARC::Spec::Structure>,
+L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>,
 L<MARC::Spec::Parser|MARC::Spec::Parser>
 
 =cut

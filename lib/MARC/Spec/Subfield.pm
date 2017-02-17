@@ -37,7 +37,7 @@ L<MARC::Spec::Subfield|MARC::Spec::Subfield>
 
 =head1 DESCRIPTION
 
-L<MARC::Spec::Field|MARC::Spec::Subfield> is the subfield specification of a L<MARC::Spec|MARC::Spec>.
+L<MARC::Spec::Subfield|MARC::Spec::Subfield> is the subfield specification of a L<MARC::Spec|MARC::Spec>.
 
 See L<MARCspec - A common MARC record path language|http://marcspec.github.io/MARCspec/> for further 
 details on the syntax.
