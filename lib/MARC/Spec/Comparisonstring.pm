@@ -4,7 +4,7 @@ use Carp qw(croak);
 use Moo;
 use namespace::clean;
 
-our $VERSION = '0.0.3';
+our $VERSION = '0.0.4';
 
 has raw => (
     is => 'rwp',

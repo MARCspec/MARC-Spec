@@ -3,7 +3,7 @@ package MARC::Spec::Subspec;
 use Moo;
 use namespace::clean;
 
-our $VERSION = '0.0.3';
+our $VERSION = '0.0.4';
 
 has left => (
     is => 'rw',
