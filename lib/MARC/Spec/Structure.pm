@@ -11,103 +11,100 @@ const my $NO_LENGTH => -1;
 const my $LAST => '#';
 
 has base => (
-    is => 'rw',
-    lazy => 1,
-    builder => sub {
-        my ($self, $index_start) = @_;
-        my $base = ($self->can('tag')) ? $self->tag : '$'.$self->code;
-        my $index_end;
-        if(defined $index_start) {
-            $index_end =  $index_start;
-        } else {
-            $index_start = $self->index_start;
-            $index_end   =  $self->index_end;
-        }
-        
-        $base .= '['.$index_start;
-        if($index_start ne $index_end) { $base .= '-'.$index_end }
-        $base .= ']';
-
-        if(defined $self->char_start) {
-            my $char_start = $self->char_start;
-            my $char_end = $self->char_end;
-            if($char_start ne 0 && $char_end ne '#') {
-                $base .= '/'.$char_start;
-                if($char_end ne $char_start) { $base .= '-'.$char_end }
-            }
-        }
-
-        if($self->can('indicator1')) {
-            my $indicators = (defined $self->indicator1) ? $self->indicator1 : '_';
-            $indicators   .= (defined $self->indicator2) ? $self->indicator2 : '';
-            if($indicators ne '_') { $base .= '_'.$indicators }
-        }
-
-        return $base;
-    }
+    is      => 'rwp',
+    lazy    => 1,
+    builder => '_base'
 );
 
+sub _base {
+    my ($self) = @_;
+
+    my $base = ($self->can('tag')) ? $self->tag : '$'.$self->code;
+
+    $base .= '['.$self->index_start;
+    if($self->index_start ne $self->index_end) { $base .= '-'.$self->index_end }
+    $base .= ']';
+
+    if(defined $self->char_start) {
+        my $char_start = $self->char_start;
+        my $char_end   = $self->char_end;
+        unless($char_start == 0 && $char_end eq '#') {
+            $base .= '/'.$char_start;
+            if($char_end ne $char_start) { $base .= '-'.$char_end }
+        }
+    }
+    if($self->can('indicator1')) {
+        my $indicators = (defined $self->indicator1) ? $self->indicator1 : '_';
+        $indicators   .= (defined $self->indicator2) ? $self->indicator2 : '';
+        if($indicators ne '_') { $base .= '_'.$indicators }
+    }
+
+    return $base;
+}
+
+
 has index_start => (
-    is => 'rw',
+    is      => 'rw',
     default => sub {0},
     trigger => sub {
         my ($self, $index_start) = @_;
-        if(!defined $self->index_end) { 
-            $self->index_end($index_start) 
-        }
-        elsif ($LAST ne $self->index_end && $LAST ne $index_start && $self->index_end < $index_start) {
+        if ($LAST ne $self->index_end && $LAST ne $index_start && $self->index_end < $index_start) {
             $self->index_end($index_start);
+        } else {
+            $self->_set_base( $self->_base() );
         }
         $self->_set_index_length( _calculate_length($index_start, $self->index_end) )
     }
 );
 
 has index_end => (
-    is => 'rw',
+    is      => 'rw',
     default => sub {$LAST},
     trigger => sub {
         my ($self, $index_end) = @_;
         if ($LAST ne $self->index_start && $LAST ne $index_end && $self->index_start > $index_end) {
             $self->index_start($index_end);
+        } else {
+            $self->_set_base( $self->_base() );
         }
         $self->_set_index_length( _calculate_length($self->index_start, $index_end) )
     }
 );
     
 has index_length => (
-    is => 'rwp',
-    lazy => 1,
+    is      => 'rwp',
     default => sub {$NO_LENGTH}
 );
 
 has char_start => (
-    is => 'rw',
+    is      => 'rw',
     trigger => sub {
         my ($self, $char_start) = @_;
         if(!defined $self->char_end) { $self->char_end($char_start) }
         $self->_set_char_pos($self->char_start.'-'.$self->char_end);
         $self->_set_char_length( _calculate_length($char_start, $self->char_end) );
+        $self->_set_base( $self->_base() )
     }
 );
 
 has char_end => (
-    is => 'rw',
+    is      => 'rw',
     trigger => sub {
         my ($self, $char_end) = @_;
         if(!defined $self->char_start) { $self->char_start($char_end) }
         $self->_set_char_pos($self->char_start.'-'.$self->char_end);
-        $self->_set_char_length( _calculate_length($self->char_start, $char_end) )
+        $self->_set_char_length( _calculate_length($self->char_start, $char_end) );
+        $self->_set_base( $self->_base() )
     }
 );
 
 has char_pos => (
-    is => 'rwp',
-    lazy => 1
+    is => 'rwp'
 );
 
 has char_length => (
-    is => 'rwp',
-    lazy => 1,
+    is      => 'rwp',
+    lazy    => 1,
     builder => sub {
         my ($self) = @_;
         return _calculate_length($self->char_start, $self->char_end)
@@ -115,7 +112,7 @@ has char_length => (
 );
 
 has subspecs => (
-    is => 'rwp',
+    is  => 'rwp',
     isa => sub {
         foreach my $ss (@{$_[0]}) {
             if(ref $ss eq 'ARRAY') {
