@@ -84,7 +84,8 @@ has char_start => (
         $self->_set_char_pos($self->char_start.'-'.$self->char_end);
         $self->_set_char_length( _calculate_length($char_start, $self->char_end) );
         $self->_set_base( $self->_base() )
-    }
+    },
+    predicate => 1
 );
 
 has char_end => (
@@ -95,11 +96,13 @@ has char_end => (
         $self->_set_char_pos($self->char_start.'-'.$self->char_end);
         $self->_set_char_length( _calculate_length($self->char_start, $char_end) );
         $self->_set_base( $self->_base() )
-    }
+    },
+    predicate => 1
 );
 
 has char_pos => (
-    is => 'rwp'
+    is => 'rwp',
+    predicate => 1
 );
 
 has char_length => (
@@ -261,13 +264,13 @@ Is the base class for L<MARC::Spec::Field|MARC::Spec::Field> and L<MARC::Spec::S
 
 =head1 METHODS
 
-=head2 new(MARC::Spec::Field)
+=head2 set_index_start_end (Str)
 
-Create a new MARC::Spec instance. Parameter must be an instance of L<MARC::Spec::Field|MARC::Spec::Field>.
+Sets MARC::Spec::Structure::$index_start and MARC::Spec::Structure::$index_end from an index position or range.
 
-=head2 parse(Str)
+=head2 set_char_start_end (Str)
 
-Parses a MARCspec as string and returns an instance of MARC::Spec.
+Sets MARC::Spec::Structure::$char_start and MARC::Spec::Structure::$char_end from an character position or range.
 
 =head2 add_subspec(MARC::Spec::Subspec)
 
@@ -281,21 +284,62 @@ elements must be instances of L<MARC::Spec::Subspec|MARC::Spec::Subspec>.
 
 =head1 PREDICATES
 
+=head2 has_char_start
+
+True if attribute char_start has an value and false otherwise.
+
+=head2 has_char_end
+
+True if attribute char_end has an value and false otherwise.
+
+=head2 has_char_pos
+
+True if attribute char_pos has an value and false otherwise.
+
 =head2 has_subspecs
 
 Returns true if attribute subspecs has an value and false otherwise.
 
 =head1 ATTRIBUTES
 
-=head2 field
+=head2 base
 
-Obligatory. Attribute field is an instance of L<MARC::Spec::Field|MARC::Spec::Field>.
-See L<MARC::Spec::Field|MARC::Spec::Field> for the description of attributes. 
+Obligatory. Scalar. Normalized MARCspec without Subspecs.
 
-=head2 subfields
+=head2 char_start
 
-If defined, subfields is an array of instances of L<MARC::Spec::Subfield|MARC::Spec::Subfield>.
-See L<MARC::Spec::Subfield|MARC::Spec::Subfield> for the description of attributes.
+If defined, the beginning character position of a character position or range.
+
+=head2 char_end
+
+If defined, the ending character position of a character position or range.
+Only present if MARC::Spec::Structure::$char_start is defined.
+
+=head2 char_length
+
+The difference of MARC::Spec::Structure::$char_start and MARC::Spec::Structure::$char_end if both are numeric
+(or else -1).
+Only present if MARC::Spec::Structure::$char_start is defined.
+
+=head2 char_pos
+
+If defined, the character position or range.
+Only present if MARC::Spec::Structure::$char_start is defined.
+
+=head2 index_start
+
+Obligatory. The beginning index of field repetitions. Maybe a positiv integer or the character '#'.
+Default is 0.
+
+=head2 index_end
+
+Obligatory. The ending index of field repetitions. Maybe a positiv integer or the character '#'.
+Default is '#'.
+
+=head2 index_length
+
+Obligatory. The difference of MARC::Spec::Structure::$index_start and MARC::Spec::Structure::$index_end if both are numeric.
+Default is -1.
 
 =head1 AUTHOR
 

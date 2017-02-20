@@ -13,11 +13,13 @@ has tag => (
 );
 
 has indicator1 => (
-    is => 'rw'
+    is => 'rw',
+    predicate => 1
 );
     
 has indicator2 => (
-    is => 'rw'
+    is => 'rw',
+    predicate => 1
 );
 
 sub BUILDARGS {
@@ -64,28 +66,42 @@ Create a new MARC::Spec::Field instance. Parameter must be a valid MARCspec fiel
 Appends a subspec to the array of the attribute subspecs. Parameter must be an instance of 
 L<MARC::Spec::Subspec|MARC::Spec::Subspec>.
 
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
-
 =head2 add_subspecs(ArrayRef[MARC::Spec::Subspec])
 
 Appends subspecs to the array of the attribute subspecs. Parameter must be an ArrayRef and 
 elements must be instances of L<MARC::Spec::Subspec|MARC::Spec::Subspec>.
 
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
-
 =head2 to_string
 
 Returns the spec as a string.
 
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
-
 =head1 PREDICATES
+
+Some predicates are inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
+
+=head2 has_char_start
+
+True if attribute char_start has an value and false otherwise.
+
+=head2 has_char_end
+
+True if attribute char_end has an value and false otherwise.
+
+=head2 has_char_pos
+
+True if attribute char_pos has an value and false otherwise.
+
+=head2 has_indicator1
+
+True if attribute indicator 1 has an value and false otherwise.
+
+=head2 has_indicator2
+
+True if attribute indicator 2 has an value and false otherwise.
 
 =head2 has_subspecs
 
-Returns true if attribute subspecs has a value and false otherwise.
-
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
+Returns true if attribute subspecs has an value and false otherwise.
 
 =head1 ATTRIBUTES
 
@@ -93,9 +109,7 @@ Some attributes are inherited from L<MARC::Spec::Structure|MARC::Spec::Structure
 
 =head2 base
 
-Obligatory. The base Field spec without subspecs.
-
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
+Obligatory. Scalar. The base Field spec without subspecs.
 
 =head2 tag
 
@@ -105,20 +119,14 @@ Obligatory. The field tag.
 
 If defined, the character position or range. Only present if MARC::Spec::Field::$char_start is defined.
 
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
-
 =head2 char_start
 
 If defined, the beginning character position of a character position or range.
-
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
 
 =head2 char_end
 
 If defined, the ending character position of a character position or range.
 Only present if MARC::Spec::Field::$char_start is defined.
-
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
 
 =head2 char_length
 
@@ -126,28 +134,25 @@ The difference of MARC::Spec::Field::$char_start and MARC::Spec::Field::$char_en
 (or else -1).
 Only present if MARC::Spec::Field::$char_start is defined.
 
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
+=head2 char_pos
+
+If defined, the character position or range.
+Only present if MARC::Spec::Field::$char_start is defined.
 
 =head2 index_start
 
 Obligatory. The beginning index of field repetitions. Maybe a positiv integer or the character '#'.
 Default is 0.
 
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
-
 =head2 index_end
 
 Obligatory. The ending index of field repetitions. Maybe a positiv integer or the character '#'.
 Default is '#'.
 
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
-
 =head2 index_length
 
 Obligatory. The difference of MARC::Spec::Field::$index_start and MARC::Spec::Field::$index_end if both are numeric.
 Default is -1.
-
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
 
 =head2 indicator1
 
@@ -165,8 +170,6 @@ and/or an array of arrays (AoA) of instances of L<MARC::Spec::Subspec|MARC::Spec
 in this AoA must be validated as a combination with the boolean 'OR'.
 
 See L<MARC::Spec::Subspec|MARC::Spec::Subspec> for description of attributes of L<MARC::Spec::Subspec|MARC::Spec::Subspec>.
-
-Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
 
 =head1 AUTHOR
 

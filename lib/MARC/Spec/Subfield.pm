@@ -44,6 +44,8 @@ details on the syntax.
 
 =head1 METHODS
 
+Some methods are inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
+
 =head2 new
 
 Create a new MARC::Spec::Subfield instance.
@@ -67,6 +69,26 @@ Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
 Returns the spec as a string.
 
 Inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
+
+=head1 PREDICATES
+
+Some predicates are inherited from L<MARC::Spec::Structure|MARC::Spec::Structure>.
+
+=head2 has_char_start
+
+True if attribute char_start has an value and false otherwise.
+
+=head2 has_char_end
+
+True if attribute char_end has an value and false otherwise.
+
+=head2 has_char_pos
+
+True if attribute char_pos has an value and false otherwise.
+
+=head2 has_subspecs
+
+Returns true if attribute subspecs has an value and false otherwise.
 
 =head1 ATTRIBUTES
 
