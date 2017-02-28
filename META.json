@@ -4,7 +4,7 @@
       "Carsten Klee C<< <klee at cpan.org> >>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.039, Dist::Milla version v1.0.16, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Milla version v1.0.17, Dist::Zilla version 6.008, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -15,12 +15,12 @@
    "name" : "MARC-Spec",
    "no_index" : {
       "directory" : [
-         "t",
-         "xt",
+         "eg",
+         "examples",
          "inc",
          "share",
-         "eg",
-         "examples"
+         "t",
+         "xt"
       ]
    },
    "prereqs" : {
@@ -31,7 +31,7 @@
       },
       "develop" : {
          "requires" : {
-            "Dist::Milla" : "v1.0.16",
+            "Dist::Milla" : "v1.0.17",
             "Test::Pod" : "1.41"
          }
       },
@@ -55,18 +55,19 @@
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/MARCspec/MARC-Spec/issues"
+         "web" : "https://github.com/phochste/MARC-Spec/issues"
       },
-      "homepage" : "https://github.com/MARCspec/MARC-Spec",
+      "homepage" : "https://github.com/phochste/MARC-Spec",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/MARCspec/MARC-Spec.git",
-         "web" : "https://github.com/MARCspec/MARC-Spec"
+         "url" : "https://github.com/phochste/MARC-Spec.git",
+         "web" : "https://github.com/phochste/MARC-Spec"
       }
    },
    "version" : "0.1.0",
    "x_contributors" : [
       "Carsten Klee <cKlee@users.noreply.github.com>"
-   ]
+   ],
+   "x_serialization_backend" : "Cpanel::JSON::XS version 3.0225"
 }
 

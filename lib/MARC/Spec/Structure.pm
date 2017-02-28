@@ -28,7 +28,7 @@ sub _base {
     if(defined $self->char_start) {
         my $char_start = $self->char_start;
         my $char_end   = $self->char_end;
-        unless($char_start == 0 && $char_end eq '#') {
+        unless($char_start eq '0' && $char_end eq '#') {
             $base .= '/'.$char_start;
             if($char_end ne $char_start) { $base .= '-'.$char_end }
         }
@@ -70,7 +70,7 @@ has index_end => (
         $self->_set_index_length( _calculate_length($self->index_start, $index_end) )
     }
 );
-    
+
 has index_length => (
     is      => 'rwp',
     default => sub {$NO_LENGTH}
@@ -123,7 +123,7 @@ has subspecs => (
                     croak('Subspec is not an instance of MARC::Spec::Subspec.')
                         if(ref $_ss ne 'MARC::Spec::Subspec')
                 }
-            } else { 
+            } else {
                 croak('Subspec is not an instance of MARC::Spec::Subspec.')
                     if(ref $ss ne 'MARC::Spec::Subspec')
             }
@@ -158,7 +158,7 @@ sub add_subspec {
 
 sub add_subspecs {
     my ($self, $subspecs) = @_;
-    if (ref $subspecs ne 'ARRAY') { 
+    if (ref $subspecs ne 'ARRAY') {
         croak('Subspecs is not an ARRAYRef!')
     }
     if(!$self->has_subspecs) {
@@ -250,10 +250,10 @@ L<MARC::Spec::Structure|MARC::Spec::Structure>
 =head1 SYNOPSIS
 
     use MARC::Spec::Field;
-    
+
     # create a new field
     my $field = MARC::Spec::Field->new('246');
-    
+
     # field does inherit all attributes, predicates and methods
     say $field->DOES('MARC::Spec::Structure'); # 1
 
@@ -274,12 +274,12 @@ Sets MARC::Spec::Structure::$char_start and MARC::Spec::Structure::$char_end fro
 
 =head2 add_subspec(MARC::Spec::Subspec)
 
-Appends a subspec to the array of the attribute subspecs. Parameter must be an instance of 
+Appends a subspec to the array of the attribute subspecs. Parameter must be an instance of
 L<MARC::Spec::Subspec|MARC::Spec::Subspec>.
 
 =head2 add_subspecs(ArrayRef[MARC::Spec::Subspec])
 
-Appends subspecs to the array of the attribute subspecs. Parameter must be an ArrayRef and 
+Appends subspecs to the array of the attribute subspecs. Parameter must be an ArrayRef and
 elements must be instances of L<MARC::Spec::Subspec|MARC::Spec::Subspec>.
 
 =head1 PREDICATES
