@@ -28,7 +28,7 @@ sub _base {
     if(defined $self->char_start) {
         my $char_start = $self->char_start;
         my $char_end   = $self->char_end;
-        unless($char_start == 0 && $char_end eq '#') {
+        unless($char_start eq '0' && $char_end eq '#') {
             $base .= '/'.$char_start;
             if($char_end ne $char_start) { $base .= '-'.$char_end }
         }
