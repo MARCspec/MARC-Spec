@@ -2,6 +2,8 @@ Revision history for MARC-Spec-Parser
 
 {{$NEXT}}
 
+0.1.1  2017-03-01 06:42:01 CET
+        - equality test on mixed scalar
 0.1.0  2017-02-20 12:01:40 CET
 
         - new has_* attributes
