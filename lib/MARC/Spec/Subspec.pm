@@ -64,7 +64,7 @@ L<MARC::Spec::Subspec|MARC::Spec::Subspec>
 
 =head1 DESCRIPTION
 
-L<MARC::Spec::Subspec|MARC::Spec::Subspec> is the subspec specification of a L<MARC::Spec|MARC::Spec>.
+L<MARC::Spec::Subspec|MARC::Spec::Subspec> - subspec specification
 
 See L<MARCspec - A common MARC record path language|http://marcspec.github.io/MARCspec/> for further 
 details on the syntax.

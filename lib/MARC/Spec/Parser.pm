@@ -299,7 +299,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec::Parser|MARC::Spec::Parser>
+L<MARC::Spec::Parser|MARC::Spec::Parser> - parses a MARCspec as string
 
 =head1 SYNOPSIS
 

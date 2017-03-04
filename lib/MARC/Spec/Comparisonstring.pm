@@ -48,7 +48,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>
+L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring> - comparison string specification
 
 =head1 SYNOPSIS
 
