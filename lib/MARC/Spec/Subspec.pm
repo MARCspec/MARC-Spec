@@ -40,7 +40,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec::Subspec|MARC::Spec::Subspec>
+L<MARC::Spec::Subspec|MARC::Spec::Subspec> - subspec specification
 
 =head1 SYNOPSIS
 

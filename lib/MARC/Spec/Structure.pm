@@ -245,7 +245,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec::Structure|MARC::Spec::Structure>
+L<MARC::Spec::Structure|MARC::Spec::Structure> - base class
 
 =head1 SYNOPSIS
 

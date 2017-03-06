@@ -25,7 +25,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec::Subfield|MARC::Spec::Subfield>
+L<MARC::Spec::Subfield|MARC::Spec::Subfield> - subfield specification
 
 =head1 SYNOPSIS
 

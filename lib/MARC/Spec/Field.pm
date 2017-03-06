@@ -34,7 +34,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec::Field|MARC::Spec::Field>
+L<MARC::Spec::Field|MARC::Spec::Field> - field specification
 
 =head1 SYNOPSIS
 
