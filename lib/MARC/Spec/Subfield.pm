@@ -3,7 +3,7 @@ package MARC::Spec::Subfield;
 use Moo;
 use namespace::clean;
 
-our $VERSION = '0.1.1';
+our $VERSION = '0.1.2';
 
 extends 'MARC::Spec::Structure';
 

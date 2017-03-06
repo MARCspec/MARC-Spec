@@ -5,7 +5,7 @@ use Const::Fast;
 use Carp qw(croak);
 use namespace::clean;
 
-our $VERSION = '0.1.1';
+our $VERSION = '0.1.2';
 
 const my $NO_LENGTH => -1;
 const my $LAST => '#';
