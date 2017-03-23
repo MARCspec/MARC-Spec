@@ -327,7 +327,7 @@ MARCspec as string.
 
 =head2 spec
 
-Obligatory. The parameter string the MARC::Spec::Parser was instanciated with.
+Obligatory. The parameter string the MARC::Spec::Parser was instantiated with.
 
 =head2 marcspec
 
