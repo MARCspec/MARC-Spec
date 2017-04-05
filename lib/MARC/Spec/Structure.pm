@@ -164,7 +164,7 @@ sub add_subspecs {
     if(!$self->has_subspecs) {
         $self->_set_subspecs([$subspecs])
     } else {
-        my @merged = ( @{$self->subspecs}, @{$subspecs} );
+        my @merged = ( @{$self->subspecs}, $subspecs );
         $self->_set_subspecs( \@merged )
     }
 }
