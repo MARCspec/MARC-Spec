@@ -117,15 +117,15 @@ has char_length => (
 has subspecs => (
     is  => 'rwp',
     isa => sub {
-        foreach my $ss (@{$_[0]}) {
-            if(ref $ss eq 'ARRAY') {
-                foreach my $_ss (@{$ss}) {
+        foreach my $and (@{$_[0]}) {
+            if(ref $and eq 'ARRAY') {
+                foreach my $or (@{$and}) {
                     croak('Subspec is not an instance of MARC::Spec::Subspec.')
-                        if(ref $_ss ne 'MARC::Spec::Subspec')
+                        if(ref $or ne 'MARC::Spec::Subspec')
                 }
-            } else { 
+            } else {
                 croak('Subspec is not an instance of MARC::Spec::Subspec.')
-                    if(ref $ss ne 'MARC::Spec::Subspec')
+                    if(ref $and ne 'MARC::Spec::Subspec')
             }
         }
     },
@@ -162,9 +162,10 @@ sub add_subspecs {
         croak('Subspecs is not an ARRAYRef!')
     }
     if(!$self->has_subspecs) {
-        $self->_set_subspecs([$subspecs])
+        $self->_set_subspecs($subspecs)
     } else {
-        my @merged = ( @{$self->subspecs}, $subspecs );
+        my @merged = @{$self->subspecs};
+        push @merged, @{$subspecs};
         $self->_set_subspecs( \@merged )
     }
 }

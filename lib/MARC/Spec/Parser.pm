@@ -120,7 +120,7 @@ sub _populate_subspecs {
             foreach my $or_subspec (@{$subspec}) {
                 push @or, $self->_match_subterms($or_subspec, $base);
             }
-            $spec->add_subspecs(\@or);
+            $spec->add_subspecs([\@or]);
         }
         else {
             $spec->add_subspec( $self->_match_subterms($subspec->[0], $base ) );
