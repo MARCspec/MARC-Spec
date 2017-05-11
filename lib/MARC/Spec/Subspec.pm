@@ -52,7 +52,7 @@ L<MARC::Spec::Subspec|MARC::Spec::Subspec> - subspec specification
     my $subspec = MARC::Spec::Subspec->new;
     
     # create the subterms
-    my $ms  = MARC::Spec->parse('245$a')';
+    my $ms  = MARC::Spec::parse('245$a')';
     my $cmp = MARC::Spec::Comparisonstring->new('Perl');
     
     # add subterms to subspec
