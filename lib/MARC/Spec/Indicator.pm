@@ -4,7 +4,7 @@ use Moo;
 use Carp qw(croak);
 use namespace::clean;
 
-our $VERSION = '1.0.0';
+our $VERSION = '2.0.0';
 
 has position => (
     is => 'rw',
