@@ -12,16 +12,6 @@ has tag => (
     required => 1
 );
 
-has indicator1 => (
-    is => 'rw',
-    predicate => 1
-);
-    
-has indicator2 => (
-    is => 'rw',
-    predicate => 1
-);
-
 sub BUILDARGS {
     my ($class, @args) = @_;
     if (@args % 2 == 1) { unshift @args, "tag" }
@@ -91,14 +81,6 @@ True if attribute char_end has an value and false otherwise.
 
 True if attribute char_pos has an value and false otherwise.
 
-=head2 has_indicator1
-
-True if attribute indicator 1 has an value and false otherwise.
-
-=head2 has_indicator2
-
-True if attribute indicator 2 has an value and false otherwise.
-
 =head2 has_subspecs
 
 Returns true if attribute subspecs has an value and false otherwise.
@@ -154,14 +136,6 @@ Default is '#'.
 Obligatory. The difference of MARC::Spec::Field::$index_start and MARC::Spec::Field::$index_end if both are numeric.
 Default is -1.
 
-=head2 indicator1
-
-If defined, the indicator 1 of a data field. Only present if MARC::Spec::Field::$char_start is not defnied.
-
-=head2 indicator2
-
-If defined, the indicator 2 of a data field. Only present if MARC::Spec::Field::$char_start is not defnied.
-
 =head2 subspecs
 
 Optional. An array of instances of L<MARC::Spec::Subspec|MARC::Spec::Subspec>, thus all subspecs in this 
@@ -198,6 +172,7 @@ Please report any bugs to L<https://github.com/MARCspec/MARC-Spec/issues|https:/
 
 L<MARC::Spec|MARC::Spec>,
 L<MARC::Spec::Subfield|MARC::Spec::Subfield>,
+L<MARC::Spec::Indicator|MARC::Spec::Indicator>,
 L<MARC::Spec::Subspec|MARC::Spec::Subspec>,
 L<MARC::Spec::Structure|MARC::Spec::Structure>,
 L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>,

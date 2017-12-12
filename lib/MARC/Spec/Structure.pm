@@ -33,11 +33,6 @@ sub _base {
             if($char_end ne $char_start) { $base .= '-'.$char_end }
         }
     }
-    if($self->can('indicator1')) {
-        my $indicators = (defined $self->indicator1) ? $self->indicator1 : '_';
-        $indicators   .= (defined $self->indicator2) ? $self->indicator2 : '';
-        if($indicators ne '_') { $base .= '_'.$indicators }
-    }
 
     return $base;
 }
@@ -370,6 +365,7 @@ Please report any bugs to L<https://github.com/MARCspec/MARC-Spec/issues|https:/
 L<MARC::Spec|MARC::Spec>,
 L<MARC::Spec::Field|MARC::Spec::Field>,
 L<MARC::Spec::Subfield|MARC::Spec::Subfield>,
+L<MARC::Spec::Indicator|MARC::Spec::Indicator>,
 L<MARC::Spec::Subspec|MARC::Spec::Subspec>,
 L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>,
 L<MARC::Spec::Parser|MARC::Spec::Parser>
