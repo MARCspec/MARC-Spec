@@ -4,8 +4,6 @@ use Test::Exception;
 use MARC::Spec::Comparisonstring;
 use MARC::Spec::Parser;
 
-use DDP;
-
 my $cmp = MARC::Spec::Comparisonstring->new('this\sis\sa\stest');
 ok $cmp->raw eq 'this\sis\sa\stest', 'raw';
 ok $cmp->comparable eq 'this is a test', 'comparable';
