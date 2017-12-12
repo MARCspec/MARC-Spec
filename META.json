@@ -64,7 +64,7 @@
          "web" : "https://github.com/MARCspec/MARC-Spec"
       }
    },
-   "version" : "2.0.0",
+   "version" : "2.0.1",
    "x_contributors" : [
       "Carsten Klee <carsten.klee@sbb.spk-berlin.de>",
       "Carsten Klee <cKlee@users.noreply.github.com>",

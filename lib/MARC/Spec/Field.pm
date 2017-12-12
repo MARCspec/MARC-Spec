@@ -5,7 +5,7 @@ use namespace::clean;
 
 extends 'MARC::Spec::Structure';
 
-our $VERSION = '2.0.0';
+our $VERSION = '2.0.1';
 
 has tag => (
     is => 'rw',
