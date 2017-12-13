@@ -308,7 +308,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec::Parser|MARC::Spec::Parser> - parses a MARCspec as string
+MARC::Spec::Parser - parses a MARCspec as string
 
 =head1 SYNOPSIS
 
@@ -322,7 +322,7 @@ L<MARC::Spec::Parser|MARC::Spec::Parser> - parses a MARCspec as string
 
 =head1 DESCRIPTION
 
-L<MARC::Spec::Parser|MARC::Spec::Parser> parses a MARCspec as string into a L<MARC::Spec|MARC::Spec>.
+MARC::Spec::Parser parses a MARCspec as string into a L<MARC::Spec|MARC::Spec>.
 L<MARC::Spec|MARC::Spec> is a L<MARCspec - A common MARC record path language|http://marcspec.github.io/MARCspec/> parser and validator.
 
 =head1 METHODS
@@ -367,10 +367,22 @@ Please report any bugs to L<https://github.com/MARCspec/MARC-Spec/issues|https:/
 
 =head1 SEE ALSO
 
-L<MARC::Spec|MARC::Spec>,
-L<MARC::Spec::Field|MARC::Spec::Field>,
-L<MARC::Spec::Subfield|MARC::Spec::Subfield>,
-L<MARC::Spec::Subspec|MARC::Spec::Subspec>,
-L<MARC::Spec::Structure|MARC::Spec::Structure>,
-L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>
+=over
+
+=item * L<MARC::Spec|MARC::Spec>
+
+=item * L<MARC::Spec::Field|MARC::Spec::Field>
+
+=item * L<MARC::Spec::Subfield|MARC::Spec::Subfield>
+
+=item * L<MARC::Spec::Indicator|MARC::Spec::Indicator>
+
+=item * L<MARC::Spec::Subspec|MARC::Spec::Subspec>
+
+=item * L<MARC::Spec::Structure|MARC::Spec::Structure>
+
+=item * L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>
+
+=back
+
 =cut

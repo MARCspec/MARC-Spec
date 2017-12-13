@@ -133,7 +133,7 @@ MARC::Spec - A MARCspec parser and builder
 
 =head1 DESCRIPTION
 
-L<MARC::Spec|MARC::Spec> is a L<MARCspec - A common MARC record path language|http://marcspec.github.io/MARCspec/> parser and validator.
+MARC::Spec is a L<MARCspec - A common MARC record path language|http://marcspec.github.io/MARCspec/> parser and builder.
 
 =head1 FUNCTIONS
 
@@ -206,12 +206,22 @@ Please report any bugs to L<https://github.com/MARCspec/MARC-Spec/issues|https:/
 
 =head1 SEE ALSO
 
-L<MARC::Spec::Field|MARC::Spec::Field>,
-L<MARC::Spec::Subfield|MARC::Spec::Subfield>,
-L<MARC::Spec::Indicator|MARC::Spec::Indicator>,
-L<MARC::Spec::Subspec|MARC::Spec::Subspec>,
-L<MARC::Spec::Structure|MARC::Spec::Structure>,
-L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>,
-L<MARC::Spec::Parser|MARC::Spec::Parser>
+=over
+
+=item * L<MARC::Spec::Field|MARC::Spec::Field>
+
+=item * L<MARC::Spec::Subfield|MARC::Spec::Subfield>
+
+=item * L<MARC::Spec::Indicator|MARC::Spec::Indicator>
+
+=item * L<MARC::Spec::Subspec|MARC::Spec::Subspec>
+
+=item * L<MARC::Spec::Structure|MARC::Spec::Structure>
+
+=item * L<MARC::Spec::Comparisonstring|MARC::Spec::Comparisonstring>
+
+=item * L<MARC::Spec::Parser|MARC::Spec::Parser>
+
+=back
 
 =cut
