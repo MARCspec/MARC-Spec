@@ -88,7 +88,7 @@ __END__
 
 =head1 NAME
 
-L<MARC::Spec|MARC::Spec> - A MARCspec parser and builder
+MARC::Spec - A MARCspec parser and builder
 
 =head1 SYNOPSIS
 
