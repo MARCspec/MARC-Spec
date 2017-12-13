@@ -2,6 +2,9 @@ Revision history for MARC-Spec-Parser
 
 {{$NEXT}}
 
+2.0.2  2017-12-13 07:36:04 CET
+        - minor: adjusted POD
+        - Tidied up abstract in pod as reported by CPANTS. from manwar
 2.0.1  2017-12-12 15:33:38 CET
         - removed DPP dependencyy in test
 2.0.0  2017-12-12 13:46:21 CET

@@ -1,6 +1,6 @@
 # NAME
 
-[MARC::Spec](https://metacpan.org/pod/MARC::Spec) - A MARCspec parser and builder
+MARC::Spec - A MARCspec parser and builder
 
 # SYNOPSIS
 
@@ -45,7 +45,7 @@
 
 # DESCRIPTION
 
-[MARC::Spec](https://metacpan.org/pod/MARC::Spec) is a [MARCspec - A common MARC record path language](http://marcspec.github.io/MARCspec/) parser and validator.
+MARC::Spec is a [MARCspec - A common MARC record path language](http://marcspec.github.io/MARCspec/) parser and builder.
 
 # FUNCTIONS
 
@@ -114,10 +114,10 @@ Please report any bugs to [https://github.com/MARCspec/MARC-Spec/issues](https:/
 
 # SEE ALSO
 
-[MARC::Spec::Field](https://metacpan.org/pod/MARC::Spec::Field),
-[MARC::Spec::Subfield](https://metacpan.org/pod/MARC::Spec::Subfield),
-[MARC::Spec::Indicator](https://metacpan.org/pod/MARC::Spec::Indicator),
-[MARC::Spec::Subspec](https://metacpan.org/pod/MARC::Spec::Subspec),
-[MARC::Spec::Structure](https://metacpan.org/pod/MARC::Spec::Structure),
-[MARC::Spec::Comparisonstring](https://metacpan.org/pod/MARC::Spec::Comparisonstring),
-[MARC::Spec::Parser](https://metacpan.org/pod/MARC::Spec::Parser)
+- [MARC::Spec::Field](https://metacpan.org/pod/MARC::Spec::Field)
+- [MARC::Spec::Subfield](https://metacpan.org/pod/MARC::Spec::Subfield)
+- [MARC::Spec::Indicator](https://metacpan.org/pod/MARC::Spec::Indicator)
+- [MARC::Spec::Subspec](https://metacpan.org/pod/MARC::Spec::Subspec)
+- [MARC::Spec::Structure](https://metacpan.org/pod/MARC::Spec::Structure)
+- [MARC::Spec::Comparisonstring](https://metacpan.org/pod/MARC::Spec::Comparisonstring)
+- [MARC::Spec::Parser](https://metacpan.org/pod/MARC::Spec::Parser)
