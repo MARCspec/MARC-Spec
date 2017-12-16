@@ -12,7 +12,7 @@ require MARC::Spec::Subspec;
 
 use namespace::clean;
 
-our $VERSION = '2.0.2';
+our $VERSION = '2.0.3';
 
 has spec => (
     is => 'rw',

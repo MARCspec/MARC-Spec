@@ -2,6 +2,8 @@ Revision history for MARC-Spec-Parser
 
 {{$NEXT}}
 
+2.0.3  2017-12-16 09:28:09 CET
+        - fixed bug indictor subspec abbreviation
 2.0.2  2017-12-13 07:36:04 CET
         - minor: adjusted POD
         - Tidied up abstract in pod as reported by CPANTS. from manwar
