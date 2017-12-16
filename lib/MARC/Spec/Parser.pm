@@ -253,13 +253,11 @@ sub _spec_context {
     my $firstChar = substr $spec,0,1;
     if($firstChar eq '^') {
         my $refPos = index $fullcontext, $firstChar;
-
         if(0 <= $refPos) {
-            if('$' ne substr $fullcontext,$refPos - 1,1) {
-               return substr($fullcontext,0,$refPos).$spec;
-            }
+            return substr($fullcontext,0,$refPos)."$spec";
         }
-        return $fullcontext.$spec;
+
+        return "$fieldContext"."$spec";
     }
     
     if($firstChar eq '$') { return $fieldContext.$spec }
@@ -269,10 +267,10 @@ sub _spec_context {
 
         if(0 <= $refPos) {
             if('$' ne substr $fullcontext,$refPos - 1,1) {
-                return substr($fullcontext,0,$refPos).$spec;
+                return substr($fullcontext,0,$refPos)."$spec";
             }
         }
-        return $fullcontext.$spec;
+        return "$fullcontext"."$spec";
     }
 
     return $spec;
